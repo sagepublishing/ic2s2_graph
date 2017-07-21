@@ -54,13 +54,29 @@ d3.json("d3_graph.json", function(json) {
       .attr("class", "node")
       .call(force.drag);
 
-  node.append("circle")
-      .attr("r","15");
+      d3.selectAll('g.node')  //here's how you get all the nodes
+        .each(function(d) {
+          var d2=d3.select(this) // Transform to d3 Object
+          if (d.type == "Keyword"){
+              console.log(d);
+              d2.append("circle")
+                  .attr("r","12");
+              console.log(d2.keys());
+          } else {
+            d2.append("circle")
+                .attr("r","10").attr("fill","blue");
+          }
+          // your update code here as it was in your example
+        });
 
   node.append("text")
       .attr("dx", 12)
       .attr("dy", ".35em")
-      //.text(function(d) { return d.name });
+      .text(function(d) {
+        if (d.type == "Keyword"){
+          return d.name;
+        };
+      });
 
   force.on("tick", function() {
     link.attr("x1", function(d) { return d.source.x; })
