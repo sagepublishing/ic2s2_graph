@@ -1,0 +1,2 @@
+ {"statements":[{"statement":"MATCH p=()-[r:Studies]-(q:Keyword) WHERE q.weight>8 RETURN q,r,p",
+                  "resultDataContents":["graph"]}]}
